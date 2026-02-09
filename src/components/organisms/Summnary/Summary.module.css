@@ -1,0 +1,186 @@
+.summary {
+  width: 800px;
+  padding: 0px 20px;
+  background-color: #fff;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  margin: 24px 0 16px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.right {
+  position: fixed;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.link {
+  position: fixed;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2492fa;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Tabs para General / Mis actualizaciones */
+.tabs {
+  display: flex;
+  gap: 16px;
+}
+
+.tabs h4 {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tabs h4:hover {
+  color: #111827;
+}
+
+.tabs h4.active {
+  color: #111827;
+  border-bottom-color: #fac30f;
+}
+
+.statsRow {
+  display: flex;
+  gap: 12px;
+}
+
+.statCard {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 14px;
+  width: 160px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #9ca3af;
+  margin-top: 6px;
+}
+
+.progressCircle {
+  margin-top: 12px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+
+  background: conic-gradient(#dc2626 0deg 180deg,
+      #d2d2d2 180deg 360deg);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.progressCircle::before {
+  content: "";
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.progressCircle span {
+  position: relative;
+  font-size: 25px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Estilos para hacer las tablas más pequeñas */
+.summary :global(table) {
+  font-size: 14px;
+}
+
+.summary :global(thead th) {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.summary :global(tbody td) {
+  padding: 12px;
+}
+
+.projectCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.projectCell p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.projectTitle {
+  font-weight: 500;
+  font-size: 14px;
+  color: #111827;
+}
+
+/*Columna Equipo*/
+.team>div {
+  display: flex;
+}
+
+.avatar {
+  width: 40px;
+  height: 30px;
+  background: #ffe9b3;
+  color: #333;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -15px;
+
+  transform: rotate(90deg);
+  clip-path: polygon(25% 6.7%,
+      75% 6.7%,
+      100% 50%,
+      75% 93.3%,
+      25% 93.3%,
+      0% 50%);
+}
+
+.team span p {
+  transform: rotate(-90deg);
+  font-size: 13px;
+}

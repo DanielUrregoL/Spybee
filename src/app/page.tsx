@@ -1,66 +1,96 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { useEffect, useState } from "react";
+import MainTemplate from "@/components/templates/MainTemplate/MainTemplate";
+import Header from "@/components/organisms/Header/Header";
+import ProjectTable from "@/components/organisms/ProjectTable/ProjectTable";
+import Pagination from "@/components/molecules/Pagination/Pagination";
+import MapBox from "@/components/organisms/MapBox/MapBox";
+import { useProjectStore } from "@/store/projectStore";
+import { getProjects } from "@/services/getProjects";
+import styles from "@/app/page.module.css"
+import Summary from "@/components/organisms/Summnary/Summary";
+import {
+  Presentation,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
+export default function HomePage() {
+  const [showMap, setShowMap] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+
+  const setProjects = useProjectStore((s) => s.setProjects);
+  const search = useProjectStore((s) => s.search);
+  const setSearch = useProjectStore((s) => s.setSearch);
+  const paginatedProjects = useProjectStore((s) => s.paginatedProjects);
+  const selectedId = useProjectStore((s) => s.selectedProjectId);
+  const selectProject = useProjectStore((s) => s.selectProject);
+  const currentPage = useProjectStore((s) => s.currentPage);
+  const totalPages = useProjectStore((s) => s.totalPages);
+  const setPage = useProjectStore((s) => s.setPage);
+
+  useEffect(() => {
+    setProjects(getProjects());
+  }, [setProjects]);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main>
+      <MainTemplate
+        header={
+          <Header
+            searchValue={search}
+            onSearchChange={setSearch}
+            showMap={showMap}
+            onToggleMap={() => setShowMap((v) => !v)}
+          />
+        }
+      />
+
+      <button
+        className={`${styles.summaryToggle} ${showSummary ? styles.summaryActive : ""}`}
+        onClick={() => setShowSummary((v) => !v)}
+      >
+        {showSummary ? "" : <Presentation size={25} />}
+      </button>
+
+      <button
+        className={`${styles.summaryToggleCircle} ${showSummary ? styles.summaryActive : ""}`}
+        onClick={() => setShowSummary((v) => !v)}
+      >
+        {showSummary ? <ChevronRight size={25} /> : <ChevronLeft size={25} />}
+      </button>
+
+      <div className={showSummary ? styles.contentWrapper + ' ' + styles.summaryActive : styles.contentWrapper}>
+        <div
+          className={`${styles.mapWrapper} ${showMap ? styles.show : styles.hide} ${showSummary ? styles.summaryActive : ""}`}
+        >
+          <MapBox />
+        </div>
+
+        <ProjectTable
+          projects={paginatedProjects}
+          selectedId={selectedId}
+          onSelect={selectProject}
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      </div>
+
+      {/* SUMMARY */}
+      <aside
+        className={`${styles.summary} ${showSummary ? styles.summaryVisible : ""}`}
+      >
+        <Summary
+          projects={paginatedProjects}
+          selectedId={selectedId}
+          onSelect={selectProject}
+        />
+      </aside>
+    </main>
   );
 }

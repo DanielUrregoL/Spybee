@@ -1,0 +1,26 @@
+.dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 130px;
+    width: 300px;
+    padding: 5px 0;
+    background: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown button {
+    font-size: 18px;
+    width: 100%;
+    padding: 12px 35px;
+    background: none;
+    border: none;
+    color: #000;
+    text-align: left;
+}
+
+.dropdown button:hover {
+    background-color: #e6e6e6;
+}

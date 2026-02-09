@@ -1,0 +1,81 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    margin-bottom: 1.1%;
+}
+
+.label {
+    background-color: #e6e6e6;
+    color: #666;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin: 0 5px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.left h1 {
+    font-size: 50px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttonRotated {
+    transform: rotate(180deg);
+}
+
+.right button {
+    padding: 6 10px;
+    color: #737777;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.right button:hover {
+    background-color: #e6e6e6;
+}
+
+.buttonGroup {
+    position: relative;
+    display: inline-flex;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+}
+
+.buttonGroup button {
+    border-radius: 0;
+}
+
+/* Separadores internos */
+.buttonGroup button+button {
+    border-left: 2px solid #e6e6e6;
+}
+
+.buttonCreate {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000 !important;
+    background-color: #fac30f !important;
+    height: 50px;
+    width: 200px;
+    padding-left: 15px !important;
+    font-size: 20px;
+}
+
+
+.midleButton.active {
+    background: #e6e6e6;
+}
